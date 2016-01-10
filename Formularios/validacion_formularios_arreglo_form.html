@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Validaci&oacute;n de formularios utilizando el arreglo forms</title>
+  </head>
+  <body>
+    <form method="post" name="frmRegistroUsuarios" action="respuesta.html" id="frmRegistroUsuarios">
+      <div>
+        <div>
+          <label for="txtNombre">Nombre</label>
+          <input type="text" name="txtNombre" id="txtNombre" class="obligatorio" />
+        </div>
+        <div>
+          <label for="txtApellido">Apellido</label>
+          <input type="text" name="txtApellido" id="txtApellido" />
+        </div>
+        <div>
+          <label for="txtTelefono">Tel&eacute;fono</label>
+          <input type="text" name="txtTelefono" id="txtTelefono" class="obligatorio" />
+        </div>
+        <div>
+          <label for="txtDireccion">Direcci&oacute;n</label>
+          <input type="text" name="txtDireccion" id="txtDireccion" />
+        </div>
+        <div>
+          <label for="txtEmail">Correo electr&oacute;nico</label>
+          <input type="text" name="txtEmail" id="txtEmail" class="obligatorio" />
+        </div>
+      </div>
+      <div>
+        <button type="submit" id="btnRegistrar">
+          Registrar
+        </button>
+      </div>
+    </form>
+
+    <form method="post" name="frmVacio" id="frmVacio">
+      <button type="submit">Bot&oacute;n vacio</button>
+    </form>
+
+    <div id="contenedorMensajes"></div>
+  </body>
+  <script type="text/javascript">
+    window.onload = function() {
+      var formularios = document.forms;
+      var totalFormularios = formularios.length;
+
+      document.getElementById("contenedorMensajes").style.display = "none";
+
+      /*
+       * Método para validar los formularios que esten presente en la página HTML
+       */
+      function validarFormulario(evento) {
+        var elementosObligatorios = event.srcElement.getElementsByClassName("obligatorio");
+
+        document.getElementById("contenedorMensajes").style.display = "block";
+
+        for (indice = 0; indice < elementosObligatorios.length; indice++) {
+          var elementoObligatorio = elementosObligatorios[indice];
+
+          if (elementoObligatorio.value == null || elementoObligatorio.value == "") {
+            elementoObligatorio.style.borderColor = "red";
+            crearMensajeObligatorio(elementoObligatorio.name);
+          }
+        }
+
+        return false;
+      }
+
+      function crearMensajeObligatorio(campoTexto) {
+        var elementoParrafo = document.createElement("p");
+        var mensaje = document.createTextNode("El campo " + campoTexto + " es obligatorio.");
+        elementoParrafo.appendChild(mensaje);
+        document.getElementById("contenedorMensajes").appendChild(elementoParrafo);
+      }
+
+      /*
+       * Dependiendo la cantidad de formularios que haya, asigna el método
+       * validarFormulario a cada uno.
+       */
+      for (indice = 0; indice < totalFormularios; indice++) {
+        formularios[indice].onsubmit = validarFormulario;
+      }
+    }
+  </script>
+</html>
