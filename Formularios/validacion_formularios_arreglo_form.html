@@ -42,31 +42,79 @@
   </body>
   <script type="text/javascript">
     window.onload = function() {
+      /*
+       * Recoge todos los formularios que están creados en esta página.
+       */
       var formularios = document.forms;
+
+      /*
+       * Obtiene la cantidad de formularios que tiene la página.
+       */
       var totalFormularios = formularios.length;
 
+      /*
+       * Deja oculto el contenedor de mensajes.
+       */
       document.getElementById("contenedorMensajes").style.display = "none";
 
       /*
-       * Método para validar los formularios que esten presente en la página HTML
+       * Método para validar los formularios que esten presente en la página
+       * HTML
        */
       function validarFormulario(evento) {
+        /*
+         * Cuando se haya disparado el evento que envía los datos del formulario,
+         * Se obtiene el formulario que ejecutó el evento y posteriormente se
+         * obtiene todos los elementos que son obligatorios para dicho formulario.
+         */
         var elementosObligatorios = event.srcElement.getElementsByClassName("obligatorio");
 
+        /*
+         * Variable que contabiliza el total de campos que hacen falta por
+         * diligenciar.
+         */
+        var totalFaltantes = 0;
+
+        /*
+         * Se cambia la visualización del contenedor de mensajes para que se
+         * puedan mostrar los campos que son obligatorios.
+         */
         document.getElementById("contenedorMensajes").style.display = "block";
 
+        /*
+         * Se recorren todos los elementos obligatorios.
+         */
         for (indice = 0; indice < elementosObligatorios.length; indice++) {
           var elementoObligatorio = elementosObligatorios[indice];
 
+          /*
+           * Sí el campo no contiene un valor se resalta con rojo para que se
+           * sepa que se necesita colocar un valor para el campo.
+           */
           if (elementoObligatorio.value == null || elementoObligatorio.value == "") {
+            totalFaltantes++;
+
             elementoObligatorio.style.borderColor = "red";
+
+            /*
+             * Se llama a este método para que construya el mensaje de
+             * obligatoriedad para el campo.
+             */
             crearMensajeObligatorio(elementoObligatorio.name);
           }
         }
 
-        return false;
+        if (totalFaltantes > 0) {
+          return false;
+        } else {
+          return true;
+        }
       }
 
+      /**
+       * Método que crea un nuevo mensaje de obligatoriedad y lo deja en el
+       * contenedor de mensajes 'contenedorMensajes'.
+       */
       function crearMensajeObligatorio(campoTexto) {
         var elementoParrafo = document.createElement("p");
         var mensaje = document.createTextNode("El campo " + campoTexto + " es obligatorio.");
