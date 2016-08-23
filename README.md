@@ -5,3 +5,4 @@ Este repositorio contiene una amplia colección de scripts JS para ser aplicados
 Entre las librerías que se adjuntaran se encuentra:
 
 1. Administración de nodos.
+2. Ventana emergente.
