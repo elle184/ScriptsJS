@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Creaci&oacute;n de nodos con JavaScript</title>
+	</head>
+	<body id="cuerpoPagina">
+		<button type="button" id="btnCrearNodo" onClick="crearNodo();">Crear elemento</button>
+		<div id="cCajasTexto">
+			<div id="cCajaTexto0">
+				<input type="text" placeholder="Texto..." />
+				<button type="button" title="Borrar" onClick="eliminarNodo(this.parentNode)">-</button>
+			</div>
+		</div>
+		<div id="panelClickDerecho">
+			<p>Este panel se activo con el click derecho del ratón.</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function() {
+			document.getElementById("panelClickDerecho").style.visibility = "hidden";
+
+			document.getElementById("btnCrearNodo").onclick = crearNodo;
+			document.getElementById("cuerpoPagina").onclick = mostrarPanelClickDerecho;
+
+			/** Función para crear un nodo */
+			function crearNodo(evento) {
+				console.log(evento);
+				cCajasTexto = document.getElementById("cCajasTexto");
+
+				//Creación de un nuevo elemento
+				var cajaTexto = document.createElement("input");
+				cajaTexto.setAttribute("type", "text");
+				cajaTexto.setAttribute("placeholder", "Texto...");
+
+				cCajasTexto.appendChild(cajaTexto);
+			}
+
+			/** Función para eliminar un nodo */
+			function eliminarNodo(elemento) {
+				elemento.parentNode.removeChild(elemento);
+			}
+
+			function mostrarPanelClickDerecho(evento) {
+				if (evento.which == 3) {
+					document.getElementById("panelClickDerecho").style.visibility = "visible";
+				}
+			}
+		}
+	</script>
+</html>
