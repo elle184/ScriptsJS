@@ -125,9 +125,6 @@
 			var radioButton = radioButtons[indice];
 			var radioButtonActual = document.getElementsByName(radioButton.name);
 console.log(radioButtonActual);
-
-			
-
 			if (radioButton.type == "radio") {
 				nombreRadioButton = radioButton.name;
 
