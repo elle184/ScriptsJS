@@ -21,8 +21,8 @@
                     <td>Beaudin</td>
                     <td>936-266-1332</td>
                     <td>
-                        <button type="button" class="accionAgregar">+</button>
-                        <button type="button" class="accionBorrar">-</button>
+                        <button type="button" class="btnAgregar">+</button>
+                        <button type="button" class="btnBorrar">-</button>
                     </td>
                 </tr>
                 <tr>
@@ -31,8 +31,8 @@
                     <td>Cody</td>
                     <td>318-233-8015</td>
                     <td>
-                        <button type="button" class="accionAgregar">+</button>
-                        <button type="button" class="accionBorrar">-</button>
+                        <button type="button" class="btnAgregar">+</button>
+                        <button type="button" class="btnBorrar">-</button>
                     </td>
                 </tr>
                 <tr>
@@ -53,8 +53,33 @@
           var aBtnAgregar = document.getElementsByClassName("btnAgregar");
           var aBtnBorrar = document.getElementsByClassName("btnBorrar");
           var tabla = document.getElementById("tabla");
-          console.log("Cantidad de filas de la tabla: " + tabla.rows.length);
-          console.log("Cantidad de filas del cuerpo de la tabla: " + tabla.tBodies[0].rows.length);
+          
+          /*
+           * Método que se encarga de agregar una nueva fila a la tabla.
+           */
+          function crearFila(evento) {
+              console.log(evento);
+              console.log(evento.srcElement.parentNode.parentElement);
+              /*
+               * Se decalara el índice de la fila obteniendo el total de filas
+               * del cuerpo y sumandole una unidad.
+               */
+              var numeroFila = tabla.tBodies[0].rows.length + 1;
+              
+              
+              /*
+               * Se inserta una nueva fila en el cuerpo de la tabla.
+               */
+              //tabla.tBodies[0].insertRow(numeroFila);
+              
+              
+          }
+          
+          /*
+           * Al botón de agregar fila se le añade el evento que creará una nueva
+           * fila en la tabla
+           */
+          aBtnAgregar[2].onclick = crearFila;
           
           /*
            * Se recorren las filas del cuerpo de la tabla.
@@ -68,7 +93,7 @@
                 /*
                  * Se muestra el valor que tenga cada celda.
                  */               
-                console.log(tabla.tBodies[0].rows[r].cells[c].innerHTML);
+                //console.log(tabla.tBodies[0].rows[r].cells[c].innerHTML);
               }
           }
         };
