@@ -4,6 +4,10 @@
         <title>Manejo de tablas con DOM</title>
     </head>
     <body>
+        <div>
+            <button type="button" class="btnAgregar">+</button>
+            <button type="button" class="btnBorrar">-</button>
+        </div>
         <table id="tabla">
             <thead>
                 <tr>
@@ -11,7 +15,6 @@
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Tel&eacute;fono</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -21,81 +24,76 @@
                     <td>Beaudin</td>
                     <td>936-266-1332</td>
                     <td>
-                        <button type="button" class="btnAgregar">+</button>
-                        <button type="button" class="btnBorrar">-</button>
-                    </td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>Justin</td>
                     <td>Cody</td>
                     <td>318-233-8015</td>
-                    <td>
-                        <button type="button" class="btnAgregar">+</button>
-                        <button type="button" class="btnBorrar">-</button>
-                    </td>
                 </tr>
                 <tr>
                     <td>3</td>
                     <td>Norma</td>
                     <td>Butler</td>
                     <td>915-750-3609</td>
-                    <td>
-                        <button type="button" class="btnAgregar">+</button>
-                        <button type="button" class="btnBorrar">-</button>
-                    </td>
                 </tr>
             </tbody>
         </table>
+        <div>
+            <button type="button" class="btnAgregar">+</button>
+            <button type="button" class="btnBorrar">-</button>
+        </div>
     </body>
     <script type="text/javascript">
         window.onload = function() {
-          var aBtnAgregar = document.getElementsByClassName("btnAgregar");
-          var aBtnBorrar = document.getElementsByClassName("btnBorrar");
-          var tabla = document.getElementById("tabla");
-          
-          /*
-           * Método que se encarga de agregar una nueva fila a la tabla.
-           */
-          function crearFila(evento) {
-              console.log(evento);
-              console.log(evento.srcElement.parentNode.parentElement);
-              /*
-               * Se decalara el índice de la fila obteniendo el total de filas
-               * del cuerpo y sumandole una unidad.
-               */
-              var numeroFila = tabla.tBodies[0].rows.length + 1;
-              
-              
-              /*
-               * Se inserta una nueva fila en el cuerpo de la tabla.
-               */
-              //tabla.tBodies[0].insertRow(numeroFila);
-              
-              
-          }
-          
-          /*
-           * Al botón de agregar fila se le añade el evento que creará una nueva
-           * fila en la tabla
-           */
-          aBtnAgregar[2].onclick = crearFila;
-          
-          /*
-           * Se recorren las filas del cuerpo de la tabla.
-           */
-          for (var r in tabla.tBodies[0].rows) {
-              /*
-               * Por cada fila se recorren sus columnas para obtener el valor 
-               * de cada celda.
-               */
-              for (var c in tabla.tBodies[0].rows[r].cells) {
-                /*
-                 * Se muestra el valor que tenga cada celda.
-                 */               
-                //console.log(tabla.tBodies[0].rows[r].cells[c].innerHTML);
-              }
-          }
+            var tabla = document.getElementById("tabla");
+            var botonesCrearFila = document.getElementsByClassName("btnAgregar");
+            var botonesBorrarFila = document.getElementsByClassName("btnBorrar");
+            
+            /*
+            tabla.tBodies[0].insertRow(3);
+            console.log(tabla.tBodies[0].rows);
+            var cabecera = document.createElement("th");
+            cabecera.setAttribute("scope", "row");
+            cabecera.innerHTML = "4 - 1";
+            tabla.tBodies[0].insertRow(3).appendChild(cabecera);
+            tabla.tBodies[0].rows[3].insertCell(1);
+            tabla.tBodies[0].rows[3].cells[1].innerHTML = "Celda 4 - 2";
+            tabla.tBodies[0].rows[3].insertCell(2);
+            tabla.tBodies[0].rows[3].cells[2].innerHTML = "Celda 4 - 3";
+            */
+            
+            /**
+             * 1- Obtener el número de filas
+             * 2- Crear un nuevo elemento de tipo td
+             * 3- Obtener el número de celdas de la fila anterior para crear la 
+             *    misma cantidad en la nueva fila.
+             * 4- Se crean las nuevas celdas en función a la cantidad de celdas
+             *    de la fila anterior.
+             */
+            function crearFila(evento) {
+                var nuevaFila = tabla.tBodies[0].insertRow(tabla.tBodies[0].rows.length);
+                var celda = document.createElement("td");
+                var totalCeldas = tabla.tBodies[0].rows[tabla.tBodies[0].rows.length - 2].cells.length;
+                console.log("Total filas: " + tabla.tBodies[0].rows.length);
+                console.log("Total celdas: " + totalCeldas);
+                for (var c = 0; c < totalCeldas; c++) {
+                  tabla.tBodies[0].rows[tabla.tBodies[0].rows.length - 1].insertCell(c);  
+                }
+                //console.log(evento);
+            };
+            
+            function borrarFila(evento) {
+              console.log(evento);  
+            };
+            
+            for (var f in botonesCrearFila) {
+                botonesCrearFila[f].onclick = crearFila;
+            }
+            
+            for (var f in botonesBorrarFila) {
+                botonesBorrarFila[f].onclick = borrarFila;
+            }
         };
     </script>
 </html>
