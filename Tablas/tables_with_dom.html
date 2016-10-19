@@ -61,11 +61,33 @@
              */
             function crearFila(evento) {
                 var nuevaFila = tabla.tBodies[0].insertRow(tabla.tBodies[0].rows.length);
-                var celda = document.createElement("td");
+                var boton = document.createElement("button");
                 var totalCeldas = tabla.tBodies[0].rows[tabla.tBodies[0].rows.length - 2].cells.length;
+                var ultimaFila = tabla.tBodies[0].rows.length - 1;
+                var ultimaCeldaFila = totalCeldas - 1;
+
+                /*
+                 * Creación del botón 
+                 * <button type="button" class="btnBorrar">Borrar</button>
+                 */
+                boton.setAttribute("type", "button");
+                boton.setAttribute("class", "btnBorrar");
+                boton.innerHTML = "Borrar";
 
                 for (var c = 0; c < totalCeldas; c++) {
-                  tabla.tBodies[0].rows[tabla.tBodies[0].rows.length - 1].insertCell(c).innerHTML = "Celda " + (tabla.tBodies[0].rows.length - 1) + " - " + c;
+                    /*
+                     * Esta validación determina si queremos colocar un elemento
+                     * especial en la última celda de la última fila creada. 
+                     */
+                    if (c == (totalCeldas - 1)) {
+                        tabla.tBodies[0].rows[tabla.tBodies[0].rows.length - 1]
+                        .insertCell(c)
+                        .appendChild(boton);
+                    } else {
+                        tabla.tBodies[0].rows[tabla.tBodies[0].rows.length - 1]
+                        .insertCell(c)
+                        .innerHTML = "Celda " + (tabla.tBodies[0].rows.length - 1) + " - " + c;
+                    }
                 }
             };
             
