@@ -89,6 +89,22 @@
                         .innerHTML = "Celda " + (tabla.tBodies[0].rows.length - 1) + " - " + c;
                     }
                 }
+
+                /*
+                * Se realiza un recorrido por las filas que quedaron y se 
+                * les reasigna un nuevo ID de fila. Esto se hace para evitar
+                * borrar una fila cuyo indice no exista dentro del listado de
+                * filas de elemento tbody.
+                */
+                for (var i = 0; i < tabla.tBodies[0].rows.length; i++) {
+                    tabla.tBodies[0].rows[i].setAttribute("data-fila", i);
+                }
+
+                botonesBorrarFila = document.getElementsByClassName("btnBorrar");
+
+                for (var f in botonesBorrarFila) {
+                    botonesBorrarFila[f].onclick = borrarFila;
+                }
             };
             
             function borrarFila(evento) {
@@ -139,6 +155,12 @@
                 if (idFila == ultimaFila) {
                     console.log("Borrando la ultima fila");
                     tabla.tBodies[0].deleteRow(evento.srcElement.parentElement.parentElement.getAttribute("data-fila"));
+                }
+
+                botonesBorrarFila = document.getElementsByClassName("btnBorrar");
+
+                for (var f in botonesBorrarFila) {
+                    botonesBorrarFila[f].onclick = borrarFila;
                 }
             };
             
