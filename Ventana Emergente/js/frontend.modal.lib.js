@@ -12,24 +12,29 @@ window.onload = function() {
     
     //Se crea una nueva instancia para la ventana modal No. 2.
     var popUp2 = new Modal("contenedorPopUp2", "btnMostrarPopUp2", "btnCerrarPopUp2");
+
+    var clasePopUp = new Modal("PopUp", "BtnMostrarPopUp", "BtnCerrarPopUp");
     
     /*
      * Se agrega al evento onclick la función para abrir una ventana modal.
      */
-    popUp1.getBtnElementoAbrir().onclick = function() {
-      popUp1.abrirVentanaModal();
+    if (popUp1.getEsElementoId()) {
+      popUp1.getBtnElementoAbrir().onclick = function() {
+        popUp1.abrirVentanaModal();
+      }
+
+      popUp1.getBtnElementoCerrar().onclick = function() {
+        popUp1.cerrarVentanaModal();
+      }
     }
-    popUp2.getBtnElementoAbrir().onclick = function() {
-      popUp2.abrirVentanaModal();
-    }
-    
-    /*
-     * Se agrega al evento onclick la función para cerrar una ventana modal.
-     */
-    popUp1.getBtnElementoCerrar().onclick = function() {
-      popUp1.cerrarVentanaModal();
-    }
-    popUp2.getBtnElementoCerrar().onclick = function() {
-      popUp2.cerrarVentanaModal();
+
+    if (popUp2.getEsElementoId()) {
+      popUp2.getBtnElementoAbrir().onclick = function() {
+        popUp2.abrirVentanaModal();
+      }
+
+      popUp2.getBtnElementoCerrar().onclick = function() {
+        popUp2.cerrarVentanaModal();
+      }
     }
   };
