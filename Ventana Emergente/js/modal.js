@@ -1,6 +1,11 @@
 /**
  * Clase encargada de la creación de una nueva ventana modal.
- *
+ * 
+ * @param String idElemento: El nombre del ID de la ventana emergente.
+ * @param String btnElementoAbrir: El nombre del ID/Class del botón que se 
+ * encarga de abrir una ventana emergente.
+ * @param String btnElementoCerrar: El nombre del ID/Class del botón que se 
+ * encarga de cerrar una ventana emergente.
  */
 function Modal(idElemento, btnElementoAbrir, btnElementoCerrar) {
   this.idElemento = idElemento;
@@ -8,35 +13,22 @@ function Modal(idElemento, btnElementoAbrir, btnElementoCerrar) {
   this.elemento = document.getElementById(idElemento);
   this.btnElementoAbrir = document.getElementById(btnElementoAbrir);
   this.btnElementoCerrar = document.getElementById(btnElementoCerrar);
+  this.elemento.style.display = "none";
 
-  if (this.elemento === null || this.elemento == undefined) {
-    this.elemento = document.getElementsByClassName(idElemento);
-    this.esElementoId = false;
+  if (this.btnElementoAbrir === null || this.btnElementoAbrir == undefined) {
+    this.btnElementoAbrir = document.getElementsByClassName(btnElementoAbrir);
 
-    for (i in this.elemento) {
+    for (var i in this.btnElementoAbrir) {
       if (!isNaN(i)) {
-        this.elemento[i].style.display = "none";
+        this.crearAbrirVentanaEmergente(this.btnElementoAbrir[i], this.idElemento);
       }
     }
+  }
+  
+  if (this.btnElementoCerrar === null || this.btnElementoCerrar == undefined) {
+    this.btnElementoCerrar = document.getElementsByClassName(btnElementoCerrar);
 
-    if (this.btnElementoAbrir === null || this.btnElementoAbrir == undefined) {
-      this.btnElementoAbrir = document.getElementsByClassName(btnElementoAbrir);
-  
-      for (var i in this.btnElementoAbrir) {
-        if (!isNaN(i)) {
-          this.crearAbrirVentanaEmergente(this.btnElementoAbrir[i]);
-        }
-      }
-    }
-    
-    if (this.btnElementoCerrar === null || this.btnElementoCerrar == undefined) {
-      this.btnElementoCerrar = document.getElementsByClassName(btnElementoCerrar);
-  
-      this.crearCerrarVentanaEmergente(this.btnElementoCerrar);
-    }
-  } else {
-    //Estado inicial de una ventana modal.
-    this.elemento.style.display = "none";
+    this.crearCerrarVentanaEmergente(this.btnElementoCerrar);
   }
 }
 
@@ -83,7 +75,10 @@ Modal.prototype.cerrarVentanaModal = function() {
   this.elemento.style.display = "none";
 };
 
-Modal.prototype.crearAbrirVentanaEmergente = function(elementoClass) {
+/**
+ * Método encargado de crear los eventos para abrir ventanas emergentes.
+ */
+Modal.prototype.crearAbrirVentanaEmergente = function(elementoClass, idElemento) {
   elementoClass.onclick = function(e) {
     var fondo = document.createElement("div");
     var atrEstiloFondo = document.createAttribute("id");
@@ -91,24 +86,18 @@ Modal.prototype.crearAbrirVentanaEmergente = function(elementoClass) {
     fondo.setAttributeNode(atrEstiloFondo);
     document.body.appendChild(fondo);
 
-    var elementos = document.getElementsByClassName(e.srcElement.dataset.nombreclasepopup);
+    var elemento = document.getElementById(idElemento);
 
-    for (var i in elementos) {
-      if (!isNaN(i)) {
-        console.log(e.srcElement.dataset.idbtnpopup);
-        console.log(elementos[i].dataset.idpopup);
-        if (e.srcElement.dataset.idbtnpopup == elementos[i].dataset.idpopup) {
-          elementos[i].style.display = "block";
-        }
-      }
-    }
+    elemento.style.display = "block";
   }
 };
 
+/**
+ * Método encargado de crear los eventos para cerrar ventanas emergentes.
+ */
 Modal.prototype.crearCerrarVentanaEmergente = function(elementoClass) {
   for (var i in elementoClass) {
     if (!isNaN(i)) {
-      console.log(elementoClass[i]);
       elementoClass[i].onclick = function(e) {
         document.body.removeChild(document.getElementById("fondoModal"));
         e.srcElement.parentElement.style.display = "none";        

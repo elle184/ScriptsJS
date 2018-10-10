@@ -12,49 +12,15 @@
     <!-- Botón para activar la ventana modal No. 2 -->
     <button type="button" id="btnMostrarPopUp2">Mostrar Pop Up 2</button>
 
-    <!-- Ventana modal No. 1 --> 
+    <div id="contenedorPopUps">
+      <button class="BtnMostrarPopUp" type="button" w3-include-html="archivo1.html">Mostrar Pop Up 3</button>
+      <button class="BtnMostrarPopUp" type="button" w3-include-html="archivo2.html">Mostrar Pop Up 4</button>
+      <button class="BtnMostrarPopUp" type="button" w3-include-html="archivo3.html">Mostrar Pop Up 5</button>
+    </div>
+
     <div id="contenedorPopUp" class="Modal">
       <div id="btnCerrarPopUp" class="CBtnCerrar">Cerrar</div>
-      <p>Contenedor Pop Up</p>
-    </div>
-    
-    <!-- Ventana modal No. 2 -->
-    <div id="contenedorPopUp2" class="Modal">
-      <div id="btnCerrarPopUp2" class="CBtnCerrar">Cerrar</div>
-      <p>Contenedor Pop Up 2</p>
-    </div>
-
-    <div id="contenedorPopUps">
-      <button id="btnMostrarPopUp3" class="BtnMostrarPopUp" 
-        type="button" 
-        data-idBtnPopUp="3" 
-        data-nombreClasePopUp="PopUp"
-      >
-          Mostrar Pop Up3
-      </button>
-      <div id="contenedorPopUp3" class="Modal PopUp" data-idPopUp="3">
-        <div id="btnCerrarPopUp3" class="CBtnCerrar BtnCerrarPopUp">Cerrar</div>
-        <p>Contenedor Pop Up 3</p>
-      </div>
-
-      <button id="btnMostrarPopUp4" class="BtnMostrarPopUp" 
-        type="button"
-        data-idBtnPopUp="4" 
-        data-nombreClasePopUp="PopUp">Mostrar Pop Up 4</button>
-      <div id="contenedorPopUp4" class="Modal PopUp" data-idPopUp="4">
-        <div id="btnCerrarPopUp4" class="CBtnCerrar BtnCerrarPopUp">Cerrar</div>
-        <p>Contenedor Pop Up 4</p>
-      </div>
-
-      <button id="btnMostrarPopUp5" class="BtnMostrarPopUp" 
-        type="button"
-        data-idBtnPopUp="5" 
-        data-nombreClasePopUp="PopUp"
-      >Mostrar Pop Up 5</button>
-      <div id="contenedorPopUp5" class="Modal PopUp" data-idPopUp="5">
-        <div id="btnCerrarPopUp5" class="CBtnCerrar BtnCerrarPopUp">Cerrar</div>
-        <p>Contenedor Pop Up 5</p>
-      </div>
+      <div id="cParaVentanaEmergente"></div>
     </div>
   </body>
   <script type="text/javascript" src="js/frontend.modal.lib.js"></script>

@@ -11,9 +11,17 @@ window.onload = function() {
     var popUp1 = new Modal("contenedorPopUp", "btnMostrarPopUp", "btnCerrarPopUp");
     
     //Se crea una nueva instancia para la ventana modal No. 2.
-    var popUp2 = new Modal("contenedorPopUp2", "btnMostrarPopUp2", "btnCerrarPopUp2");
+    var popUp2 = new Modal("contenedorPopUp", "btnMostrarPopUp2", "btnCerrarPopUp2");
 
-    var clasePopUp = new Modal("PopUp", "BtnMostrarPopUp", "BtnCerrarPopUp");
+    /*
+     * Se crea una nueva instancia para retornar un listado de elementos que 
+     * necesitan tener su propia ventana emergente.
+     */
+    var clasePopUp = new Modal(
+      "contenedorPopUp", 
+      "BtnMostrarPopUp", 
+      "BtnCerrarPopUp"
+    );
     
     /*
      * Se agrega al evento onclick la función para abrir una ventana modal.
