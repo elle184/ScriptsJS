@@ -8,26 +8,40 @@
  * encarga de cerrar una ventana emergente.
  */
 function Modal(idElemento, btnElementoAbrir, btnElementoCerrar) {
-  this.idElemento = idElemento;
-  this.esElementoId = true;
   this.elemento = document.getElementById(idElemento);
-  this.btnElementoAbrir = document.getElementById(btnElementoAbrir);
-  this.btnElementoCerrar = document.getElementById(btnElementoCerrar);
   this.elemento.style.display = "none";
 
+  this.btnElementoAbrir = document.getElementById(btnElementoAbrir);
+  this.btnElementoCerrar = document.getElementById(btnElementoCerrar);
+  
+  /*
+   * Valida si los botones para abrir las ventanas emergentes no son 
+   * contenedores individuales y provienen de un listado de botones.
+   */
   if (this.btnElementoAbrir === null || this.btnElementoAbrir == undefined) {
     this.btnElementoAbrir = document.getElementsByClassName(btnElementoAbrir);
 
+    /*
+     * Recorre cada botón de un listado de botones y les asigna un 
+     * comportamiento de abrir la ventana emergente.
+     */ 
     for (var i in this.btnElementoAbrir) {
       if (!isNaN(i)) {
-        this.crearAbrirVentanaEmergente(this.btnElementoAbrir[i], this.idElemento);
+        this.crearAbrirVentanaEmergente(this.btnElementoAbrir[i], idElemento);
       }
     }
   }
   
+  /*
+   * Valida si los botones para cerrar las ventanas emergentes no son 
+   * contenedores individuales y provienen de un listado de botones.
+   */
   if (this.btnElementoCerrar === null || this.btnElementoCerrar == undefined) {
     this.btnElementoCerrar = document.getElementsByClassName(btnElementoCerrar);
 
+    /*
+     * Se crean los eventos para cerrar las ventanas emergentes.
+     */
     this.crearCerrarVentanaEmergente(this.btnElementoCerrar);
   }
 }
@@ -46,14 +60,6 @@ Modal.prototype.getBtnElementoCerrar = function() {
   return this.btnElementoCerrar;
 };
 
-Modal.prototype.getEsElementoId = function() {
-  return this.esElementoId;
-}
-
-Modal.prototype.getElemento = function() {
-  return this.elemento;
-}
-
 /**
  * Método que se encargar de abrir una ventana modal.
  */
@@ -64,6 +70,12 @@ Modal.prototype.abrirVentanaModal = function() {
   fondo.setAttributeNode(atrEstiloFondo);
   document.body.appendChild(fondo);
   
+  /*
+   * Detalle de fina coqueteria. Añade el texto del nombre del botón presionado 
+   * para que se evidencia el dinamismo de la ventana emergente.
+   */
+  this.insertarContenido("cParaVentanaEmergente", this.btnElementoAbrir.innerText);
+
   this.elemento.style.display = "block";
 };
 
@@ -88,6 +100,12 @@ Modal.prototype.crearAbrirVentanaEmergente = function(elementoClass, idElemento)
 
     var elemento = document.getElementById(idElemento);
 
+    /*
+     * Detalle de fina coqueteria. Añade el texto del nombre del botón presionado 
+     * para que se evidencia el dinamismo de la ventana emergente.
+     */
+    document.getElementById("cParaVentanaEmergente").innerHTML = e.srcElement.innerText;
+
     elemento.style.display = "block";
   }
 };
@@ -104,4 +122,8 @@ Modal.prototype.crearCerrarVentanaEmergente = function(elementoClass) {
       }
     }
   }
+};
+
+Modal.prototype.insertarContenido = function(contenedor, contenido) {
+  document.getElementById(contenedor).innerHTML = contenido;
 };

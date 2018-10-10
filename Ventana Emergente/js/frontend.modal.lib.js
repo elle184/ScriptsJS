@@ -26,7 +26,6 @@ window.onload = function() {
     /*
      * Se agrega al evento onclick la función para abrir una ventana modal.
      */
-    if (popUp1.getEsElementoId()) {
       popUp1.getBtnElementoAbrir().onclick = function() {
         popUp1.abrirVentanaModal();
       }
@@ -34,9 +33,7 @@ window.onload = function() {
       popUp1.getBtnElementoCerrar().onclick = function() {
         popUp1.cerrarVentanaModal();
       }
-    }
 
-    if (popUp2.getEsElementoId()) {
       popUp2.getBtnElementoAbrir().onclick = function() {
         popUp2.abrirVentanaModal();
       }
@@ -44,5 +41,4 @@ window.onload = function() {
       popUp2.getBtnElementoCerrar().onclick = function() {
         popUp2.cerrarVentanaModal();
       }
-    }
   };
