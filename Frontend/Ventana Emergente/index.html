@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mostrar ventana emergente al presionar un botón</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Botón para activar la ventana modal No. 1 -->
+    <button type="button" id="btnMostrarPopUp">Mostrar Pop Up</button>
+    
+    <!-- Botón para activar la ventana modal No. 2 -->
+    <button type="button" id="btnMostrarPopUp2">Mostrar Pop Up 2</button>
+
+    <div id="contenedorPopUps">
+      <button class="BtnMostrarPopUp" type="button">Mostrar Pop Up 3</button>
+      <button class="BtnMostrarPopUp" type="button">Mostrar Pop Up 4</button>
+      <button class="BtnMostrarPopUp" type="button">Mostrar Pop Up 5</button>
+    </div>
+
+    <div id="contenedorPopUp" class="Modal">
+      <div id="btnCerrarPopUp" class="CBtnCerrar">Cerrar</div>
+      <div id="cParaVentanaEmergente"></div>
+    </div>
+  </body>
+  <script type="text/javascript" src="js/frontend.modal.lib.js"></script>
+  <script type="text/javascript" src="js/modal.js"></script>
+</html>
