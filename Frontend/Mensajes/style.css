@@ -1,33 +1,16 @@
-#mensajeExito {
-    background-color: #2ED573;
-    border: 1px solid #2ED573;
+@charset "UTF-8";
+
+body {
+    padding: 10px;
 }
 
-#mensajeExito div, #mensajeError div {
-    padding: 3px;
+#menuOpciones ul {
+    list-style: none;
 }
 
-#mensajeExito div img, #mensajeError div img  {
-    float: right;
-    text-align: right;
+#menuOpciones ul li {
+    display: inline;
+    border: 1px solid black;
+    padding: 15px;
+    margin: 10px;
 }
-
-#mensajeError {
-    background-color: #FF6B81;
-    border: 1px solid #FF6B81;
-}
-
-#mensajeExito, #mensajeError {
-    width: 350px;
-    height: 100px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    display: none;
-}
-
-/* ########## Clases ########## */
-.TopLeft, .TopRight, .BottomLeft, .BottomRight { position: fixed; }
-.TopLeft, .TopRight { top: 50px; }
-.TopLeft, .BottomLeft { left: 10px; }
-.TopRight, .BottomRight { right: 10px; }
-.BottomLeft, .BottomRight { bottom: 50px; }
