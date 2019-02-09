@@ -1,54 +1,60 @@
-class Mensaje {
-    /**
-     * Constructor de la clase.
-     * 
-     * @param {String} eAccion: El elemento que genera la acción de mostrar el mensaje.
-     * @param {String} cMensaje: El contenedor que mostrará los mensajes
-     * @param {String} tipoMensaje: El tipo de mensaje a mostrar. Puede ser de éxito o de error.
-     * @param {String} posicion: La posición en donde el programador desea que 
-     * vaya situado el contenedor.
+/**
+ * Clase que se encarga de construir un mensaje, mostrarlo y ocultarlo.
+ * 
+ * @param JSON objMsj 
+ */
+function Mensaje(objMsj) {
+    this.objMsj = objMsj;
+    this.contenedorMsj = null;
+
+    /*
+     * Se valida si el contenedor de mensajes esta definido.
      */
-    constructor(eAccion, cMensaje, tipoMensaje, posicion, evento) {
-        this.eAccion = document.getElementById(eAccion);
-        this.aCerrar = document.getElementById(tipoMensaje);
+    if (this.objMsj.idContenedorMsj != null && this.objMsj.idContenedorMsj != "") {
+        this.contenedorMsj = document.getElementById(this.objMsj.idContenedorMsj);
+    }
+};
 
+/**
+ * Método encargado de abrir el contenedor de mensaje.
+ */
+Mensaje.prototype.abrir = function() {
+    var clases = this.objMsj.posicionMensaje;
+
+    //Se instancia el contenedor para el mensaje de texto.
+    var msjTexto = document.getElementById("msjTexto");
+
+    //Se crea un nuevo elemento de tipo parrafo.
+    var parrafo = document.createElement("p");
+
+    //Se crea un nuevo nodo de tipo texto que contendra el mensaje de respuesta.
+    var texto = document.createTextNode(this.objMsj.respuesta);
+    
+    parrafo.appendChild(texto);
+    msjTexto.appendChild(parrafo);
+
+    if (this.objMsj.tipoMensaje == "success") {
+        clases = clases.concat(" ").concat("cMsjExito");
+    } else if (this.objMsj.tipoMensaje == "error") {
+        clases = clases.concat(" ").concat("cMsjError");
+    }
+
+    this.contenedorMsj.setAttribute("class", clases);
+    this.contenedorMsj.style.display = "block";
+};
+
+/**
+ * Método encargado de cerrar el contenedor de mensaje.
+ */
+Mensaje.prototype.cerrar = function(cMsj) {
+    document.getElementById("cerrar").onclick = function() {
         /*
-         * Evento básico. Cuando se hace clic sobre un elemento que ejecuta
-         * inmediatamente el contenedor de mensajes.
+         * Cuando se este cerrando el mensaje de texto, se borrará el mensaje 
+         * que se imprimió.
          */
-        if (evento == "click") {
-            if (this.eAccion !== null) {
-                this.eAccion.onclick = function() {
-                    var contenedor =  document.getElementById(cMensaje);
+        document.getElementById("msjTexto").innerText = null;
 
-                    contenedor.style.display = "inline-block";
-                    contenedor.setAttribute("class", posicion);
-
-                    console.log("Ejecutado evento click");
-                };
-            }
-        }
-
-        /*
-         * Evento luego de la ejecución de un formulario: Cuando se envia un 
-         * formulario a procesar y retornar una respuesta.
-         */
-        if (evento == "submit") {
-            if (this.eAccion !== null) {
-                this.eAccion.onsubmit = function(e) {
-                    e.preventDefault();
-                    var contenedor = document.getElementById(cMensaje);
-
-                    contenedor.style.display = "inline-block";
-                    contenedor.setAttribute("class", posicion);
-
-                    console.log("Ejecutado evento submit");
-                };
-            }
-        }
-
-        this.aCerrar.onclick = function() {
-            document.getElementById(cMensaje).style.display = "none";
-        }
+        //Se oculta el contenedor de mensajes.
+        document.getElementById(cMsj).style.display = "none";
     }
 }
