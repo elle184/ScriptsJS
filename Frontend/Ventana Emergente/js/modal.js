@@ -2,128 +2,77 @@
  * Clase encargada de la creación de una nueva ventana modal.
  * 
  * @param String idElemento: El nombre del ID de la ventana emergente.
- * @param String btnElementoAbrir: El nombre del ID/Class del botón que se 
- * encarga de abrir una ventana emergente.
- * @param String btnElementoCerrar: El nombre del ID/Class del botón que se 
- * encarga de cerrar una ventana emergente.
+ * @param Object elementoDeAccion: Hace referencia al elemento que lleva a cabo
+ * la acción de abrir la ventana modal.
  */
-function Modal(idElemento, btnElementoAbrir, btnElementoCerrar) {
-  this.elemento = document.getElementById(idElemento);
-  this.elemento.style.display = "none";
-
-  this.btnElementoAbrir = document.getElementById(btnElementoAbrir);
-  this.btnElementoCerrar = document.getElementById(btnElementoCerrar);
-  
-  /*
-   * Valida si los botones para abrir las ventanas emergentes no son 
-   * contenedores individuales y provienen de un listado de botones.
+class Modal {
+  /**
+   * Constructor de la clase
    */
-  if (this.btnElementoAbrir === null || this.btnElementoAbrir == undefined) {
-    this.btnElementoAbrir = document.getElementsByClassName(btnElementoAbrir);
+  constructor() {
+    
+  }
 
-    /*
-     * Recorre cada botón de un listado de botones y les asigna un 
-     * comportamiento de abrir la ventana emergente.
-     */ 
-    for (var i in this.btnElementoAbrir) {
-      if (!isNaN(i)) {
-        this.crearAbrirVentanaEmergente(this.btnElementoAbrir[i], idElemento);
-      }
+  /**
+   * Método que se encargar de abrir una ventana modal.
+   * 
+   * @param Event.srcElement objeto: La información del elemento que realizará 
+   * el llamado de la ventana modal.
+   * @param String contenedorPopUp: El ID del contenedor que crea la ventana 
+   * modal.
+   */
+  static abrirVentanaModal(objeto, contenedorPopUp) {
+    //Se instancia el elemento de la ventana modal.
+    this.elemento = document.getElementById(contenedorPopUp);
+
+    //Si contenedor que tiene la acción de cerrar no esta definido, se instancia.
+    if (this.divCerrar == null) {
+      //Se crea un elemento de tipo div
+      this.divCerrar = document.createElement("div");
+
+      //Al elemento div se le agrega la clase CBtnCerrar
+      this.divCerrar.setAttribute("class", "CBtnCerrar");
+
+      //Se agrega el evento onclick para cerrar la ventana modal
+      this.divCerrar.setAttribute("onclick", "Modal.cerrarVentanaModal()");
+
+      //Se crea un nodo de tipo texto
+      this.txtCerrar = document.createTextNode("Cerrar");
+
+      //Se agrega al elemento div el nodo texto
+      this.divCerrar.appendChild(this.txtCerrar);
+
+      //Se agrega al contenedor de la ventana modal el elemento div creado.
+      this.elemento.appendChild(this.divCerrar);
     }
-  }
-  
-  /*
-   * Valida si los botones para cerrar las ventanas emergentes no son 
-   * contenedores individuales y provienen de un listado de botones.
-   */
-  if (this.btnElementoCerrar === null || this.btnElementoCerrar == undefined) {
-    this.btnElementoCerrar = document.getElementsByClassName(btnElementoCerrar);
 
     /*
-     * Se crean los eventos para cerrar las ventanas emergentes.
+     * Se crea un nuevo elemento de tipo div para el fondo que bloquea la 
+     * pantalla.
      */
-    this.crearCerrarVentanaEmergente(this.btnElementoCerrar);
-  }
-}
-
-/**
- * Método que retorna el objeto del botón que se encarga de ejecutar la ventana emergente.
- */
-Modal.prototype.getBtnElementoAbrir = function() {
-  return this.btnElementoAbrir;
-};
-
-/**
- * Método que retorna el objeto del botón que se encarga de cerrar la ventana emergente.
- */
-Modal.prototype.getBtnElementoCerrar = function() {
-  return this.btnElementoCerrar;
-};
-
-/**
- * Método que se encargar de abrir una ventana modal.
- */
-Modal.prototype.abrirVentanaModal = function() {
-  var fondo = document.createElement("div");
-  var atrEstiloFondo = document.createAttribute("id");
-  atrEstiloFondo.value="fondoModal";
-  fondo.setAttributeNode(atrEstiloFondo);
-  document.body.appendChild(fondo);
-  
-  /*
-   * Detalle de fina coqueteria. Añade el texto del nombre del botón presionado 
-   * para que se evidencia el dinamismo de la ventana emergente.
-   */
-  this.insertarContenido("cParaVentanaEmergente", this.btnElementoAbrir.innerText);
-
-  this.elemento.style.display = "block";
-};
-
-/**
- * Método que se encarga de cerrar una ventana modal.
- */
-Modal.prototype.cerrarVentanaModal = function() {
-  document.body.removeChild(document.getElementById("fondoModal"));
-  this.elemento.style.display = "none";
-};
-
-/**
- * Método encargado de crear los eventos para abrir ventanas emergentes.
- */
-Modal.prototype.crearAbrirVentanaEmergente = function(elementoClass, idElemento) {
-  elementoClass.onclick = function(e) {
     var fondo = document.createElement("div");
+
+    //Se crea un nuevo atributo de tipo id y se le agrega el valor fondoModal
     var atrEstiloFondo = document.createAttribute("id");
     atrEstiloFondo.value="fondoModal";
     fondo.setAttributeNode(atrEstiloFondo);
+    fondo.style.display = "block";
+
+    //Se agrega el elemento div creado a la pagina HTML
     document.body.appendChild(fondo);
 
-    var elemento = document.getElementById(idElemento);
-
-    /*
-     * Detalle de fina coqueteria. Añade el texto del nombre del botón presionado 
-     * para que se evidencia el dinamismo de la ventana emergente.
-     */
-    document.getElementById("cParaVentanaEmergente").innerHTML = e.srcElement.innerText;
-
-    elemento.style.display = "block";
+    //Se visualiza la ventana modal.
+    this.elemento.style.display = "block";
   }
-};
 
-/**
- * Método encargado de crear los eventos para cerrar ventanas emergentes.
- */
-Modal.prototype.crearCerrarVentanaEmergente = function(elementoClass) {
-  for (var i in elementoClass) {
-    if (!isNaN(i)) {
-      elementoClass[i].onclick = function(e) {
-        document.body.removeChild(document.getElementById("fondoModal"));
-        e.srcElement.parentElement.style.display = "none";        
-      }
-    }
+  /**
+   * Método que se encarga de cerrar una ventana modal.
+   */
+  static cerrarVentanaModal() {
+    //Se oculta el fondo modal
+    document.body.removeChild(document.getElementById("fondoModal"));
+
+    //Se cierra la ventana modal
+    this.elemento.style.display = "none";
   }
-};
-
-Modal.prototype.insertarContenido = function(contenedor, contenido) {
-  document.getElementById(contenedor).innerHTML = contenido;
-};
+}
