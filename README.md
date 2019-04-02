@@ -6,3 +6,4 @@ Entre las librerías que se adjuntaran se encuentra:
 
 1. Administración de nodos.
 2. Ventana emergente.
+3. Contenedor de mensajes WEB.
