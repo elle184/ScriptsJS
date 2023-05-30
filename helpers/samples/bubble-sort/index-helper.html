@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bubble sort algorithm</title>
+    </head>
+    <body></body>
+    <script type="text/javascript" src="../../sort.js"></script>
+    <script type="text/javascript" src="./sortable.js"></script>
+    <script type="text/javascript" src="./category.js"></script>
+    <script type="text/javascript">
+       let categories = new Array();
+       let categoryId = 0;
+
+       for (let i = 0; i < 20; i++) {
+            categoryId = Math.floor(Math.random() * 20);
+            categories[i] = new Category(categoryId, `Category ${categoryId}`); 
+       }
+
+       console.log(categories);
+
+       console.log(Sort.bubble(categories));
+    </script>
+</html>
