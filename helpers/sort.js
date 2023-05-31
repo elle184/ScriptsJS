@@ -30,7 +30,5 @@ class Sort {
             }
                 
         }
-
-        console.log(list);
     }
 }

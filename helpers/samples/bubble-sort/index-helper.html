@@ -5,6 +5,7 @@
     </head>
     <body></body>
     <script type="text/javascript" src="../../sort.js"></script>
+    <script type="text/javascript" src="../../list.js"></script>
     <script type="text/javascript" src="./sortable.js"></script>
     <script type="text/javascript" src="./category.js"></script>
     <script type="text/javascript">
@@ -16,8 +17,11 @@
             categories[i] = new Category(categoryId, `Category ${categoryId}`); 
        }
 
-       console.log(categories);
+       Sort.bubble(categories);
+       List.removeDuplicates(categories);
 
-       console.log(Sort.bubble(categories));
+       categories.forEach(function(item, index, array) {
+            console.log(item);
+       });
     </script>
 </html>
