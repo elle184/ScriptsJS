@@ -7,22 +7,30 @@
         <link rel="stylesheet" href="styles.css" media="all" />
     </head>
     <body>
-        <div>
-            <div id="optionsList">
+        <div id="container">
+            <nav id="optionsList">
                 <ul>
-                   <li><a href="#" data-option-selected="1">Option 1</a></li>
-                   <li><a href="#" data-option-selected="2">Option 2</a></li>
-                   <li><a href="#" data-option-selected="3">Option 3</a></li>
-                   <li><a href="#" data-option-selected="4">Option 4</a></li>
-                   <li><a href="#" data-option-selected="5">Option 5</a></li>
+                   <li><a href="#" class="unselected" data-option-selected="1">Option 1</a></li>
+                   <li><a href="#" class="unselected" data-option-selected="2">Option 2</a></li>
+                   <li><a href="#" class="unselected" data-option-selected="3">Option 3</a></li>
+                   <li><a href="#" class="unselected" data-option-selected="4">Option 4</a></li>
+                   <li><a href="#" class="unselected" data-option-selected="5">Option 5</a></li>
                 </ul>
+            </nav>
+            <div id="optionContainer1" class="optionContainerUnselected">
+                Opción 1
             </div>
-            <div id="options">
-                <div id="option1" data-option="1">Option 1</div>
-                <div id="option2" data-option="2">Option 2</div>
-                <div id="option3" data-option="3">Option 3</div>
-                <div id="option4" data-option="4">Option 4</div>
-                <div id="option5" data-option="5">Option 5</div>
+            <div id="optionContainer2" class="optionContainerUnselected">
+                Opción 2
+            </div>
+            <div id="optionContainer3" class="optionContainerUnSelected">
+                Opción 3
+            </div>
+            <div id="optionContainer4" class="optionContainerUnselected">
+                Opción 4
+            </div>
+            <div id="optionContainer5" class="optionContainerUnselected">
+                Opción 5
             </div>
         </div>
     </body>
