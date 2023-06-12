@@ -4,8 +4,8 @@
         <title>Bubble sort algorithm</title>
     </head>
     <body></body>
-    <script type="text/javascript" src="../../sort.js"></script>
-    <script type="text/javascript" src="../../list.js"></script>
+    <script type="text/javascript" src="./sort.js"></script>
+    <script type="text/javascript" src="../list-helper/list.js"></script>
     <script type="text/javascript" src="./sortable.js"></script>
     <script type="text/javascript" src="./category.js"></script>
     <script type="text/javascript">
@@ -14,14 +14,11 @@
 
        for (let i = 0; i < 20; i++) {
             categoryId = Math.floor(Math.random() * 20);
-            categories[i] = new Category(categoryId, `Category ${categoryId}`); 
+            categories[i] = new Category(categoryId, `Sandra R. Jones`);
        }
 
-       Sort.bubble(categories);
-       List.removeDuplicates(categories);
+       Sort.bubble(categories, Sort.NUMERIC);
 
-       categories.forEach(function(item, index, array) {
-            console.log(item);
-       });
+       console.log(categories);
     </script>
 </html>

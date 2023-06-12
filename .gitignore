@@ -1,2 +1,5 @@
 # Visual studio code files
 .vscode
+*.drawio.bkp
+*.drawio
+*.drawio
