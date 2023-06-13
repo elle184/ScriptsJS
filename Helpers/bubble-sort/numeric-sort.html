@@ -2,8 +2,42 @@
 <html>
     <head>
         <title>Bubble sort algorithm</title>
+
+        <link rel="stylesheet" href="../css/styles.css" />
     </head>
-    <body></body>
+    <body>
+        <header>
+            <h1>Scrits</h1>
+            <h2>Javascript helpers</h2>
+        </header>
+        <section>
+            <nav>
+                <ul>
+                    <li>Helpers</li>
+                    <ul>
+                        <li>Sorting</li>
+                        <ul>
+                            <li>Bubble Sorting</li>
+                            <ul>
+                                <li><a href="bubble-sort/numeric-sort.html" onClick="loadPage(this)">Numeric</a></li>
+                                <li>Alphabetical</li>
+                            </ul>
+                        </ul>
+                    </ul>
+                </ul>
+            </nav>
+            <section id="rightContainer">
+                <div id="unordered">
+                    <h3>Lista en desorden</h3>
+                </div>
+                <div id="ordered">
+                    <h3>Lista desordenada</h3>
+
+                </div>
+            </section>
+        </section>
+        <footer>Footer section</footer>
+    </body>
     <script type="text/javascript" src="./sort.js"></script>
     <script type="text/javascript" src="../list-helper/list.js"></script>
     <script type="text/javascript" src="./sortable.js"></script>
@@ -11,14 +45,32 @@
     <script type="text/javascript">
        let categories = new Array();
        let categoryId = 0;
+       let unorderedList = document.createElement('ul');
+       let orderedList = document.createElement('ul');
 
        for (let i = 0; i < 20; i++) {
             categoryId = Math.floor(Math.random() * 20);
-            categories[i] = new Category(categoryId, `Sandra R. Jones`);
+            categories[i] = new Category(categoryId, `Category ${categoryId}`);
+            
+            let listItem = document.createElement('li');
+            let textNode = document.createTextNode(`${categories[i].id} - ${categories[i].name}`);
+
+            listItem.appendChild(textNode);
+            unorderedList.appendChild(listItem);
        }
+
+       document.all.unordered.appendChild(unorderedList);
 
        Sort.bubble(categories, Sort.NUMERIC);
 
-       console.log(categories);
+       for (let category of categories) {
+            let listItem = document.createElement('li');
+            let textNode = document.createTextNode(`${category.id} - ${category.name}`);
+
+            listItem.appendChild(textNode);
+            orderedList.appendChild(listItem);
+       }
+
+       document.all.ordered.appendChild(orderedList);
     </script>
 </html>

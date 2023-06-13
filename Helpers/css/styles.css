@@ -26,6 +26,12 @@ nav {
     padding: 0px 8px;
 }
 
+#ordered, #unordered {
+    display: inline;
+    float: left;
+    margin: 0px 20px;
+}
+
 header, #rightContainer, nav, footer {
     border: 1px solid #CCC;
     border-radius: 2px;

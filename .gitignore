@@ -2,4 +2,4 @@
 .vscode
 *.drawio.bkp
 *.drawio
-*.drawio
+*.code-workspace
